@@ -1,3 +1,5 @@
 ---
 - hostname:
     name: "{{ lookup('env','PROJECT') }}-{{ lookup('env','ENVIRONMENT') }}-{{ lookup('env','TIER') }}{% if lookup('env','ROLE') is defined and lookup('env','ROLE') %}-{{ lookup('env','ROLE') }}{% endif %}"
+  tags:
+    - hostname
