@@ -1,7 +1,5 @@
 ---
 - name: Apply configuration to all servers instances
   hosts: all
-  sudo: True
-  sudo_user: root
   roles:
     - hostname
