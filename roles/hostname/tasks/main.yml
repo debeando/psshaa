@@ -1,0 +1,3 @@
+---
+- hostname:
+    name: "{{ lookup('env','PROJECT') }}-{{ lookup('env','ENVIRONMENT') }}-{{ lookup('env','TIER') }}-{{ lookup('env','ROLE') }}"
