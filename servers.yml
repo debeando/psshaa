@@ -12,3 +12,5 @@
     - ssh
     - role: proxysql
       when: tier == 'proxysql'
+    - role: mysql
+      when: tier == 'mysql'
