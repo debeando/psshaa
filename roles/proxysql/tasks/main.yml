@@ -3,13 +3,38 @@
   yum:
     name: http://www.percona.com/downloads/percona-release/redhat/0.1-4/percona-release-0.1-4.noarch.rpm
     state: present
+  tags:
+    - proxysql
 
 - name: 'Install Percona Toolkit'
   yum:
     state: present
     name: percona-toolkit
+  tags:
+    - proxysql
 
 - name: 'Install MySQL Client'
   yum:
     state: present
     name: Percona-Server-client-57
+  tags:
+    - proxysql
+
+- name: 'Install ProxySQL'
+  yum:
+    state: present
+    name: proxysql
+  notify:
+    - restarted proxysql
+  tags:
+    - proxysql
+
+- name: 'Add proxysql profile'
+  copy:
+    src: proxysql.sh
+    dest: /etc/profile.d/proxysql.sh
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - proxysql

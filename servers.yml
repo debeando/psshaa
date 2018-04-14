@@ -1,15 +1,11 @@
 ---
 - name: Apply configuration to all servers instances
   hosts: all
+  vars:
+    tier: "{{ lookup('env','TIER') }}"
   roles:
     - hostname
     - bash
     - ssh
-
-- name: Apply configuration to proxysql instances
-  hosts: localhost
-  vars:
-    tier: "{{ lookup('env','TIER') }}"
-  roles:
-    - proxysql
-  when: tier == 'proxysql'
+    - role: proxysql
+      when: tier == 'proxysql'
