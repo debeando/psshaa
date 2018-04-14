@@ -5,3 +5,11 @@
     - hostname
     - bash
     - ssh
+
+- name: Apply configuration to proxysql instances
+  hosts: localhost
+  vars:
+    tier: "{{ lookup('env','TIER') }}"
+  roles:
+    - proxysql
+  when: tier == 'proxysql'
