@@ -36,3 +36,6 @@ then # you are root, set red colour prompt
 else # normal
   PS1='\[\e[0;32m\]\h \[\e[0;36m\]\w$\[\e[0m\] '
 fi
+
+# Set custom alias:
+alias deploy='/usr/local/etc/ansible/deploy.sh'
