@@ -1,6 +1,6 @@
 ---
 - name: 'Change hostname build by EC2 tags'
   hostname:
-    name: "{{ lookup('env','PROJECT') }}-{{ lookup('env','ENVIRONMENT') }}-{{ lookup('env','TIER') }}{% if lookup('env','ROLE') is defined and lookup('env','ROLE') %}-{{ lookup('env','ROLE') }}{% endif %}"
+    name: "{{ project }}-{{ env }}-{{ tier }}{% if role is defined and role %}-{{ role }}{% endif %}"
   tags:
     - hostname

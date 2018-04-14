@@ -6,10 +6,10 @@ export LANGUAGE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # Set AWS Tags variables:
-export PROJECT={{ lookup('env','PROJECT') }}
-export ENVIRONMENT={{ lookup('env','ENVIRONMENT') }}
-export TIER={{ lookup('env','TIER') }}
-export ROLE={{ lookup('env','ROLE') }}
+export PROJECT={{ project }}
+export ENVIRONMENT={{ env }}
+export TIER={{ tier }}
+export ROLE={{ role }}
 
 # Set history variables:
 export HISTCONTROL=ignoredups:ignorespace

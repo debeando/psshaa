@@ -2,7 +2,10 @@
 - name: Apply configuration to all servers instances
   hosts: all
   vars:
+    project: "{{ lookup('env','PROJECT') }}"
+    env: "{{ lookup('env','ENVIRONMENT') }}"
     tier: "{{ lookup('env','TIER') }}"
+    role: "{{ lookup('env','ROLE') }}"
   roles:
     - hostname
     - bash
