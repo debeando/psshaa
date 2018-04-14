@@ -4,3 +4,4 @@
   roles:
     - hostname
     - bash
+    - ssh

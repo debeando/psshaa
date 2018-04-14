@@ -1,0 +1,22 @@
+---
+- name: 'Enable PermitUserEnvironment'
+  lineinfile:
+    backup: yes
+    state: present
+    dest: /etc/ssh/sshd_config
+    regexp: '^#?PermitUserEnvironment'
+    line: 'PermitUserEnvironment yes'
+  notify:
+    - restarted sshd
+  tags: ssh
+
+- name: 'Add environment variables'
+  lineinfile:
+    backup: yes
+    state: present
+    dest: /etc/ssh/sshd_config
+    insertafter: 'AcceptEnv XMODIFIERS'
+    line: 'AcceptEnv MYSQL_USER MYSQL_PASSWORD'
+  notify:
+    - restarted sshd
+  tags: ssh
