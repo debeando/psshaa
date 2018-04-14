@@ -1,5 +1,6 @@
 ---
-- template:
+- name: 'Add custom profile'
+  template:
     src: custom.sh
     dest: /etc/profile.d/custom.sh
     owner: root
