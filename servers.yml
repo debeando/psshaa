@@ -10,7 +10,7 @@
     - hostname
     - bash
     - ssh
-    - role: proxysql
-      when: tier == 'proxysql'
-    - role: mysql
-      when: tier == 'mysql'
+  tasks:
+  - include_role:
+      name: "{{ tier }}"
+    ignore_errors: yes
