@@ -27,6 +27,13 @@
   tags:
     - mysql
 
+- name: 'Install InnoTop'
+  yum:
+    state: present
+    name: innotop
+  tags:
+    - mysql
+
 - name: 'Add mysql profile'
   copy:
     src: mysql.sh
