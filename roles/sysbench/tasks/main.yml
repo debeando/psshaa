@@ -1,0 +1,45 @@
+---
+- name: 'Install Percona Repository'
+  yum:
+    name: http://www.percona.com/downloads/percona-release/redhat/0.1-4/percona-release-0.1-4.noarch.rpm
+    state: present
+  tags:
+    - sysbench
+
+- name: 'Install sysbench'
+  yum:
+    state: present
+    name: sysbench
+  tags:
+    - sysbench
+
+- name: Creates directory
+  file:
+    path: /home/ec2-user/sysbench
+    state: directory
+    owner: ec2-user
+    group: ec2-user
+    mode: 0775
+    recurse: yes
+  tags:
+    - sysbench
+
+- name: 'Add proxysql profile'
+  copy:
+    src: '{{ item }}'
+    dest: /home/ec2-user/sysbench/
+    owner: ec2-user
+    group: ec2-user
+    mode: 0644
+  with_items:
+    - domainnames.txt
+    - firstnames.txt
+    - lastnames.txt
+    - transactions.lua
+  tags:
+    - sysbench
+
+- name: Add execute permission
+  file:
+    dest: /home/ec2-user/sysbench/transactions.lua
+    mode: a+x

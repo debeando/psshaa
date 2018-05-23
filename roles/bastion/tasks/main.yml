@@ -1,0 +1,6 @@
+---
+- name: Add sysbench role
+  include_role:
+    name: sysbench
+  tags:
+    - bastion

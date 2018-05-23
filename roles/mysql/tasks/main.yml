@@ -43,3 +43,26 @@
     mode: 0644
   tags:
     - mysql
+
+- name: 'Configure logrotate'
+  copy:
+    src: logrotate.conf
+    dest: /etc/logrotate.d/mysql.conf
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - mysql
+
+- name: 'Configure cron for logrotate'
+  cron:
+    name: 'MySQL Log Rotate'
+    job: '/usr/sbin/logrotate /etc/logrotate.d/mysql.conf > /dev/null'
+  tags:
+    - mysql
+
+# Todo:
+# =====
+# mount/format/mkdir
+# config
+#
