@@ -1,0 +1,26 @@
+---
+mysql:
+  variables:
+    datadir: /mnt/dbstorage/mysql-data
+    innodb_buffer_pool_instances: 2
+    innodb_buffer_pool_size: 2G
+    innodb_file_per_table: 0
+    join_buffer_size: 16M
+    key_buffer_size: 64M
+    log_bin: /mnt/dbstorage/mysql-misc/binlog
+    log_bin_index: /mnt/dbstorage/mysql-misc/binlog.index
+    max_allowed_packet: 256M
+    max_connections: 100
+    myisam_sort_buffer_size: 16M
+    query_cache_size: 512M
+    read_buffer_size: 10M
+    read_only: 1
+    read_rnd_buffer_size: 512K
+    server_id: 2
+    slow_query_log_file: /mnt/dbstorage/mysql-data/slow-query.log
+    socket: /mnt/dbstorage/mysql-data/mysql.sock
+    sort_buffer_size: 5M
+    thread_cache_size: 50
+    tmpdir: /mnt/dbstorage/mysql-tmp
+    binlog_format: ROW
+    tx_isolation: READ-COMMITTED

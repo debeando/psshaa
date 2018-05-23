@@ -1,0 +1,35 @@
+---
+- name: Format data volumen
+  filesystem:
+    fstype: ext4
+    dev: /dev/xvdf
+
+- name: Create directory for backups
+  file:
+    path: /mnt/backups/
+    state: directory
+    owner: root
+    group: root
+    mode: 0775
+    recurse: no
+
+- name: Create directory for data
+  file:
+    path: /mnt/dbstorage/
+    state: directory
+    owner: root
+    group: root
+    mode: 0775
+    recurse: no
+
+- name: Mount up volumen
+  mount:
+    path: /mnt/dbstorage/
+    src: /dev/xvdf
+    fstype: ext4
+    state: mounted
+
+- name: Removing lost+found directory
+  file:
+    path: "/mnt/dbstorage/lost+found/"
+    state: absent

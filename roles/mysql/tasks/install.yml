@@ -1,0 +1,76 @@
+---
+- name: 'Install Percona Repository'
+  yum:
+    name: http://www.percona.com/downloads/percona-release/redhat/0.1-4/percona-release-0.1-4.noarch.rpm
+    state: present
+  tags:
+    - mysql
+
+- name: 'Install Percona Toolkit'
+  yum:
+    state: present
+    name: percona-toolkit
+  tags:
+    - mysql
+
+- name: 'Install MySQL Client'
+  yum:
+    state: present
+    name: Percona-Server-client-57
+  tags:
+    - mysql
+
+- name: 'Install MySQL Server'
+  yum:
+    state: present
+    name: Percona-Server-server-57
+  tags:
+    - mysql
+
+- name: 'Install InnoTop'
+  yum:
+    state: present
+    name: innotop
+  tags:
+    - mysql
+
+- name: Create directory structure
+  file:
+    path: "/mnt/dbstorage/{{item}}/"
+    state: directory
+    owner: mysql
+    group: mysql
+    mode: 0775
+    recurse: no
+  with_items:
+    - mysql-data
+    - mysql-log
+    - mysql-misc
+    - mysql-tmp
+
+- name: 'Add mysql profile'
+  copy:
+    src: mysql.sh
+    dest: /etc/profile.d/mysql.sh
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - mysql
+
+- name: 'Configure logrotate'
+  copy:
+    src: logrotate.conf
+    dest: /etc/logrotate.d/mysql.conf
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - mysql
+
+- name: 'Configure cron for logrotate'
+  cron:
+    name: 'MySQL Log Rotate'
+    job: '/usr/sbin/logrotate /etc/logrotate.d/mysql.conf > /dev/null'
+  tags:
+    - mysql

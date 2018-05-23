@@ -11,6 +11,7 @@
     - bash
     - ssh
   tasks:
+  - include_vars: "vars/{{ project }}-{{ env }}-{{ tier }}-{{ role }}.yml"
   - include_role:
       name: "{{ tier }}"
     ignore_errors: yes

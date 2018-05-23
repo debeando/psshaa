@@ -1,0 +1,26 @@
+---
+- name: "Verify MySQL data directory"
+  stat:
+    path: "{{ mysql.variables.datadir }}"
+  register: mysql_datadir
+  when:
+    - mysql is defined
+    - mysql.variables is defined
+    - mysql.variables.datadir is defined
+
+- name: Configure
+  template:
+    src: my.j2
+    dest: /etc/my.cnf
+    owner: root
+    group: root
+    mode: 0644
+  when:
+    - mysql_datadir is defined
+    - mysql_datadir.stat is defined
+    - mysql_datadir.stat.exists == True
+    - mysql is defined
+    - mysql.variables is defined
+    - mysql.variables.datadir is defined
+    - mysql.variables.innodb_buffer_pool_size is defined
+    - mysql.variables.server_id is defined

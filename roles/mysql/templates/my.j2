@@ -1,0 +1,86 @@
+# WARNING: MANAGED BY ANSIBLE #
+# =============================
+#
+[client]
+port   = 3306
+socket = {{ mysql.variables.socket }}
+
+[mysqld]
+bind-address                     = 0.0.0.0
+binlog_format                    = mixed
+datadir                          = {{ mysql.variables.datadir }}
+expire_logs_days                 = 10
+innodb_buffer_pool_instances     = {{ mysql.variables.innodb_buffer_pool_instances }}
+innodb_buffer_pool_size          = {{ mysql.variables.innodb_buffer_pool_size }}
+innodb_file_per_table            = {{ mysql.variables.innodb_file_per_table }}
+innodb_flush_log_at_trx_commit   = 1
+innodb_flush_method              = O_DIRECT
+innodb_log_buffer_size           = 8M
+innodb_log_file_size             = 64M
+innodb_old_blocks_time           = 1000
+innodb_recovery_update_relay_log = 1
+join_buffer_size                 = {{ mysql.variables.join_buffer_size | default(131072) }}
+key_buffer_size                  = {{ mysql.variables.key_buffer_size | default(8388608) }}
+log_bin                          = {{ mysql.variables.log_bin }}
+log_bin_index                    = {{ mysql.variables.log_bin_index }}
+log_queries_not_using_indexes    = 1
+max_allowed_packet               = 128M
+max_connections                  = {{ mysql.variables.max_connections }}
+max_heap_table_size              = 32M
+myisam_sort_buffer_size          = {{ mysql.variables.myisam_sort_buffer_size | default(8388608) }}
+net_buffer_length                = {{ mysql.variables.net_buffer_length | default(16384) }}
+open_files_limit                 = 65535
+query_cache_size                 = {{ mysql.variables.query_cache_size }}
+query_cache_type                 = 1
+read_buffer_size                 = {{ mysql.variables.read_buffer_size | default(131072) }}
+read_only                        = {{ mysql.variables.read_only | default (0) }}
+read_rnd_buffer_size             = {{ mysql.variables.read_rnd_buffer_size | default(262144) }}
+server_id                        = {{ mysql.variables.server_id }}
+slow_query_log_file              = {{ mysql.variables.slow_query_log_file }}
+socket                           = {{ mysql.variables.socket }}
+sort_buffer_size                 = {{ mysql.variables.sort_buffer_size | default(2097144) }}
+sync_binlog                      = 1
+table_definition_cache           = 4096
+table_open_cache                 = 4096
+thread_cache_size                = 50
+tmp_table_size                   = 32M
+tmpdir                           = {{ mysql.variables.tmpdir }}
+wait_timeout                     = 1800
+
+skip_external_locking
+
+# ONLY FOR RESTORE LOGICAL BACKUP AT MAXIMUM SPEED
+# ================================================
+# By default, this options is disabled.
+# This options is for instance type: c4.4xlarge
+# ------------------------------------------------
+#
+# bulk_insert_buffer_size=512M
+# innodb_additional_mem_pool_size=512M
+# innodb_autoinc_lock_mode=2
+# innodb_buffer_pool_size=20GB
+# innodb_doublewrite=0
+# innodb_flush_log_at_trx_commit=0
+# innodb_flush_method=nosync
+# innodb_io_capacity=1000
+# innodb_log_file_size=1G
+# innodb_read_io_threads=1
+# innodb_support_xa=0
+# innodb_write_io_threads=15
+# max_allowed_packet=1G
+# skip_log_bin
+
+[mysqldump]
+quick
+max_allowed_packet = 16M
+
+[mysql]
+no-auto-rehash
+safe-updates
+
+[myisamchk]
+key_buffer_size  = 8M
+sort_buffer_size = 8M
+
+[mysqlhotcopy]
+interactive_timeout
